@@ -1,2 +1,2 @@
 # libcpntools
-Java library to generate CPN Tools file.
+A Java library to generate Coloured Petri Nets in CPN Tool's xml-based ".cpn" format. 
