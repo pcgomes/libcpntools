@@ -2,23 +2,21 @@ package stave.cpntools;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
 import java.util.Enumeration;
 import java.util.Hashtable;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-
+import javax.xml.transform.TransformerFactory;
 import org.w3c.dom.Document;
-/*
-* Base class for CPN Tools manipulation.
-* Contains the exceptions for error, and methods to debug
-*/
+
+/**
+ * Base class for CPN Tools manipulation.
+ * Contains the exceptions for error, and methods to debug
+ */
 public class BaseCPNCommunication {
 
    protected static boolean mwarnings = true;

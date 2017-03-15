@@ -12,21 +12,18 @@ package stave.cpntools;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.List;
-import java.util.Iterator;
 import java.util.HashSet;
 import java.util.Hashtable;
-
+import java.util.Iterator;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-
-import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -36,8 +33,8 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    private long muniqid = 10;
 
    /**
-   * Generates sequentially identifiers for the DOM elements.
-   * @return unique identifier.
+    * Generates sequentially identifiers for the DOM elements.
+    * @return unique identifier.
    */
    private String getUniqueId() {
       muniqid++;
@@ -48,19 +45,21 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    private Document mdocument;
 
    /**
-   * The DOM object containing the CPN Tools information.
-   * @return DOM object
-   */
+    * The DOM object containing the CPN Tools information.
+    * @return DOM object
+    */
    public Document getDOM() {
       return mdocument;
    }
 
    /**
-   * Output the internal DOM to a file.
-   *
-   * @param pfilename Location of the file.
-   */
-   public void writeDOMtoCpnFile(String pfilename)  throws FileNotFoundException, TransformerConfigurationException, TransformerException {
+    * Output the internal DOM to a file.
+    *
+    * @param pfilename Location of the file.
+    */
+   public void writeDOMtoCpnFile(String pfilename) throws FileNotFoundException,
+                                                           TransformerConfigurationException,
+					                   TransformerException {
       outputDOMtoFile(mdocument, pfilename);
    }
 
@@ -71,52 +70,52 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    protected final Element minstances;
 
    /**
-   * Append an element to the cpnet section, which is the document's main section.
-   * @param pelement Element to append at cpnet section.
-   */
+    * Append an element to the cpnet section, which is the document's main section.
+    * @param pelement Element to append at cpnet section.
+    */
    public void appendElementToCpnet( Element pelement ) {
       mcpnet.appendChild( pelement );
    }
 
    /**
-   * Prepend an element to the cpnet section, which is the document's main section.
-   * @param pelement Element to append at cpnet section.
-   */
+    * Prepend an element to the cpnet section, which is the document's main section.
+    * @param pelement Element to append at cpnet section.
+    */
    public void prependElementToCpnet( Element pelement ) {
       mcpnet.insertBefore( pelement, mcpnet.getFirstChild());
    }
 
    /**
-   * Append an element to the globbox section, which contains the color set definitions.
-   * @param pelement Element to append at globbox section.
-   */
+    * Append an element to the globbox section, which contains the color set definitions.
+    * @param pelement Element to append at globbox section.
+    */
    public void appendElementToGlobbox(Element pelement) {
       mglobbox.appendChild( pelement);
    }
 
    /**
-   * Prepend an element to the globbox section, which contains the color set definitions.
-   * @param pelement Element to append at globbox section.
-   */
+    * Prepend an element to the globbox section, which contains the color set definitions.
+    * @param pelement Element to append at globbox section.
+    */
    public void prependElementToGlobbox(Element pelement) {
       mglobbox.insertBefore( pelement, mcpnet.getFirstChild());
    }
 
    /**
-   * Append an element to the instances section, which contains the instantiations of pages.
-   * @param pelement Element to append at globbox section.
-   */
+    * Append an element to the instances section, which contains the instantiations of pages.
+    * @param pelement Element to append at globbox section.
+    */
    public void appendElementToInstances(Element pinstance) {
       minstances.appendChild( pinstance);
    }
 
    /**
-   * Helper method that searches for the first descending occurance of an element with a given tag.
-   *
-   * @param proot root element to start the search.
-   * @param ptag Tag of the node you are looking for.
-   * @return reference to top-most element with a given tag. Null if empty.
-   */
+    * Helper method that searches for the first descending occurance of an element with a given tag.
+    *
+    * @param proot root element to start the search.
+    * @param ptag Tag of the node you are looking for.
+    * @return reference to top-most element with a given tag. Null if empty.
+    */
    protected Node findFirstTag(Element proot, String ptag) {
       org.w3c.dom.NodeList ltaglist = proot.getElementsByTagName(ptag);
       if (ltaglist.getLength() > 0) return ltaglist.item(0);
@@ -125,11 +124,11 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Helper method that searches for the first descending occurance of an element in the DOM with a given tag.
-   *
-   * @param ptag Tag of the node you are looking for.
-   * @return reference to top-most element with a given tag. Null if empty.
-   */
+    * Helper method that searches for the first descending occurance of an element in the DOM with a given tag.
+    *
+    * @param ptag Tag of the node you are looking for.
+    * @return reference to top-most element with a given tag. Null if empty.
+    */
    protected Node findFirstTag(String ptag) {
       org.w3c.dom.NodeList ltaglist = mdocument.getElementsByTagName(ptag);
       if (ltaglist.getLength() > 0) return ltaglist.item(0);
@@ -138,10 +137,10 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Search the DOM for an object by its "supposedly" unique id.
-   *
-   * @return reference to the object with given id.
-   */
+    * Search the DOM for an object by its "supposedly" unique id.
+    *
+    * @return reference to the object with given id.
+    */
    public Element findElementId(String pid) {
       return mdocument.getElementById( pid);
    }
@@ -149,8 +148,8 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    /* End: methods that keep track of important DOM sections */
 
    /**
-   * Constructs the basic DOM for CPN Tools file.
-   */
+    * Constructs the basic DOM for CPN Tools file.
+    */
    public CPNToolsNetFactory() throws ParserConfigurationException {
 
       // Create factory, to generate a builder, to finally create the DOM.
@@ -161,7 +160,9 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
       mdocument.setXmlVersion( "1.0" );
       //Create doc type
       DOMImplementation limplementation = mdocument.getImplementation();
-      DocumentType ldoctype = limplementation.createDocumentType( "workspaceElements", "-//CPN//DTD CPNXML 1.0//EN", "http://cpntools.org/DTD/6/cpn.dtd" );
+      DocumentType ldoctype = limplementation.createDocumentType("workspaceElements",
+                                                                 "-//CPN//DTD CPNXML 1.0//EN",
+                                                                 "http://cpntools.org/DTD/6/cpn.dtd" );
       mdocument.appendChild( ldoctype );
 
       // Add root element
@@ -201,12 +202,12 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Make a pagem element.
-   *
-   * @param pname Page's name. Used for graphical purposes.
-   * @param pid The page's (suposedly) unique id.
-   * @return DOM element representing a page.
-   */
+    * Make a pagem element.
+    *
+    * @param pname Page's name. Used for graphical purposes.
+    * @param pid The page's (suposedly) unique id.
+    * @return DOM element representing a page.
+    */
    public Element createPage(String pname, String pid) {
       Element lpage = mdocument.createElement( "page" );
       lpage.setAttribute( "id", pid );
@@ -222,22 +223,22 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Make a pagem element where the id generated automatically.
-   *
-   * @param pname Page's name. Used for graphical purposes.
-   * @return DOM element representing a page.
-   */
+    * Make a pagem element where the id generated automatically.
+    *
+    * @param pname Page's name. Used for graphical purposes.
+    * @return DOM element representing a page.
+    */
    public Element createPage( String pname ) {
       return createPage( pname, getUniqueId() );
    }
 
    /** 
-   * Search for a page using its presumably unique Id.
-   * If none if found, it creates a new page with name equals to the id.
-   *
-   * @param pid Page identifier, which is assumed to be unique.
-   * @return DOM element of the found page.
-   */
+    * Search for a page using its presumably unique Id.
+    * If none if found, it creates a new page with name equals to the id.
+    *
+    * @param pid Page identifier, which is assumed to be unique.
+    * @return DOM element of the found page.
+    */
    public Element findPageById( String pid ) {
       NodeList lpagelist = mcpnet.getElementsByTagName( "page" );
       for (int i = 0; i < lpagelist.getLength(); i++ ) {
@@ -250,13 +251,13 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates an instance element, instantiating a page.
-   * 
-   * This is the case for different pages not used in hierarchy.
-   *
-   * @param ppageid Page instantiated by this declaration, used to instantiate the defined pages.
-   * @return DOM element instance, which must be added to the corresponding \<instances\>
-   */
+    * Creates an instance element, instantiating a page.
+    * 
+    * This is the case for different pages not used in hierarchy.
+    *
+    * @param ppageid Page instantiated by this declaration, used to instantiate the defined pages.
+    * @return DOM element instance, which must be added to the corresponding \<instances\>
+    */
    public Element createInstanceForPage(String ppageid) {
       Element linstance = mdocument.createElement( "instance" );
       linstance.setAttribute( "id", getUniqueId() );
@@ -267,24 +268,24 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates an instance element, instantiating a page.
-   * 
-   * This is the case for different pages not used in hierarchy.
-   * @param ppage Page element instantiated by this declaration, used to instantiate the defined pages.
-   * @return DOM element instance, which must be added to the corresponding \<instances\>
-   */
+    * Creates an instance element, instantiating a page.
+    * 
+    * This is the case for different pages not used in hierarchy.
+    * @param ppage Page element instantiated by this declaration, used to instantiate the defined pages.
+    * @return DOM element instance, which must be added to the corresponding \<instances\>
+    */
    public Element createInstanceForPage( Element ppage ) {
       return createInstanceForPage( ppage.getAttribute( "id" ) );
    }
 
    /**
-   * Creates an instance element, instantiating a substitution transition.
-   * 
-   * This is the case for different pages not used in hierarchy.
-   *
-   * @param ppageid Page instantiated by this declaration, used to instantiate the defined pages.
-   * @return DOM element instance, which must be added to the corresponding @{code <instance>}
-   */
+    * Creates an instance element, instantiating a substitution transition.
+    * 
+    * This is the case for different pages not used in hierarchy.
+    *
+    * @param ppageid Page instantiated by this declaration, used to instantiate the defined pages.
+    * @return DOM element instance, which must be added to the corresponding @{code <instance>}
+    */
    public Element createInstanceForSTransition(String ppageid) {
       Element linstance = mdocument.createElement( "instance" );
       linstance.setAttribute( "id", getUniqueId() );
@@ -295,23 +296,23 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates an instance element, instantiating a substitution transition.
-   * 
-   * This is the case for different pages not used in hierarchy.
-   *
-   * @param ppage Page element instantiated by this declaration, used to instantiate the defined pages.
-   * @return DOM element instance, which must be added to the corresponding @{code <instance>}
-   */
+    * Creates an instance element, instantiating a substitution transition.
+    * 
+    * This is the case for different pages not used in hierarchy.
+    *
+    * @param ppage Page element instantiated by this declaration, used to instantiate the defined pages.
+    * @return DOM element instance, which must be added to the corresponding @{code <instance>}
+    */
    public Element createInstanceForSTransition( Element ppage ) {
       return createInstanceForSTransition( ppage.getAttribute( "id" ) );
    }
 
    /**
-   * Fusion elements group diferent instantiations of the same place
-   *
-   * @param pfusionname Text representing the fusion set in the menu.
-   * @return DOM element that prepresents the fusion set
-   */
+    * Fusion elements group diferent instantiations of the same place
+    *
+    * @param pfusionname Text representing the fusion set in the menu.
+    * @return DOM element that prepresents the fusion set
+    */
    public Element createFusion(String pfusionname) {
       Element lfusion = mdocument.createElement( "fusion" );
       lfusion.setAttribute( "id", getUniqueId() );
@@ -322,10 +323,10 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * 
-   * Creates the fusion_elm, which is the actual reference to which places are part of the fusion set.
-   * @return DOM element fusion_elem, which must be added to the respective fusion element.
-   */
+    * 
+    * Creates the fusion_elm, which is the actual reference to which places are part of the fusion set.
+    * @return DOM element fusion_elem, which must be added to the respective fusion element.
+    */
    public Element createFusion_elm(String pidref) {
       Element fusion = mdocument.createElement( "fusion_elm" );
       fusion.setAttribute( "idref", pidref );
@@ -334,11 +335,11 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates a new color set element, with the common structure to all sets.
-   *
-   * @param pname color set name
-   * @return new incomplete color set element.
-   */
+    * Creates a new color set element, with the common structure to all sets.
+    *
+    * @param pname color set name
+    * @return new incomplete color set element.
+    */
    private Element createBasicColset( String pname) {
       //1<color>
       Element lcolset = mdocument.createElement( "color" );
@@ -354,11 +355,11 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Creates a new singleton color set.
-   * 
-   * @param pname Color set name. Used both for graphical representation and referencing.
-   * @return DOM element representing the color set.
-   */
+    * Creates a new singleton color set.
+    * 
+    * @param pname Color set name. Used both for graphical representation and referencing.
+    * @return DOM element representing the color set.
+    */
    protected Element createUnitColset( String pname) {
       //1<color>
       Element lcolset = createBasicColset( pname);
@@ -375,11 +376,11 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Creates a new color set with standard boolean values false and true.
-   * 
-   * @param pname Color set name. Used both for graphical representation and referencing.
-   * @return DOM element representing the color set.
-   */
+    * Creates a new color set with standard boolean values false and true.
+    * 
+    * @param pname Color set name. Used both for graphical representation and referencing.
+    * @return DOM element representing the color set.
+    */
    protected Element createBoolColset( String pname) {
       //1<color>
       Element lcolset = createBasicColset( pname);
@@ -397,13 +398,13 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
    
    /** 
-   * Creates a new color set of bounded integers
-   * 
-   * @param pname Color set name. Used both for graphical representation and referencing.
-   * @param plbound The set domain's (inclusive) lower value
-   * @param pubound The set domain's (inclusive) upper value
-   * @return DOM element representing the color set.
-   */
+    * Creates a new color set of bounded integers
+    * 
+    * @param pname Color set name. Used both for graphical representation and referencing.
+    * @param plbound The set domain's (inclusive) lower value
+    * @param pubound The set domain's (inclusive) upper value
+    * @return DOM element representing the color set.
+    */
    protected Element createIntColset( String pname, String plbound, String pubound) {
 
       //1<color>
@@ -433,13 +434,14 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Creates a new color set from an enumeration.
-   * 
-   * @param pname Color set name. Used both for graphical representation and referencing.
-   * @param pitems The elements of the color set.
-   * @return DOM element representing the color set.
-   */
-   protected Element createEnumColset( String pname, Collection<String> pitems) throws BadCPNDefinitionException {
+    * Creates a new color set from an enumeration.
+    * 
+    * @param pname Color set name. Used both for graphical representation and referencing.
+    * @param pitems The elements of the color set.
+    * @return DOM element representing the color set.
+    */
+   protected Element createEnumColset( String pname, Collection<String> pitems)
+      throws BadCPNDefinitionException {
 
       // CPN Tools does not allow creation of empty sets.
       if (pitems.isEmpty()) throw new BadCPNDefinitionException("Cannot create the empty ENUM color set " + pname + ".");
@@ -477,13 +479,13 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Creates the DOM element for an color set defined by cartesian product (S1 x S2 x S3...).
-   * Obs: The declaration of the sets must preceed this one in the DOM.
-   * 
-   * @param pname Color set name. Used both for graphical representation and referencing.
-   * @param psets Ordered list of sets defining the product
-   * @return DOM element representing the color set.
-   */
+    * Creates the DOM element for an color set defined by cartesian product (S1 x S2 x S3...).
+    * Obs: The declaration of the sets must preceed this one in the DOM.
+    * 
+    * @param pname Color set name. Used both for graphical representation and referencing.
+    * @param psets Ordered list of sets defining the product
+    * @return DOM element representing the color set.
+    */
    protected Element createProductColset( String pname, List<String> psets) throws BadCPNDefinitionException {
 
       // CPN Tools does not allows declaration with arity smaller than 2
@@ -522,15 +524,16 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Creates the DOM element for an color set defined by cartesian product of two sets.
-   * Obs: The declaration of the two sets must preceed this one in the DOM.
-   * 
-   * @param pname Color set name. Used both for graphical representation and referencing.
-   * @param pset1 Domain of the first element.
-   * @param pset2 Domain of the second element.
-   * @return DOM element representing the color set.
-   */
-   protected Element createPairColset( String pname, String pset1, String pset2 ) throws BadCPNDefinitionException {
+    * Creates the DOM element for an color set defined by cartesian product of two sets.
+    * Obs: The declaration of the two sets must preceed this one in the DOM.
+    * 
+    * @param pname Color set name. Used both for graphical representation and referencing.
+    * @param pset1 Domain of the first element.
+    *  @param pset2 Domain of the second element.
+    * @return DOM element representing the color set.
+    */
+   protected Element createPairColset( String pname, String pset1, String pset2 )
+      throws BadCPNDefinitionException {
       java.util.Vector<String> lcollection = new java.util.Vector<String>();
       lcollection.add(pset1);
       lcollection.add(pset2);
@@ -539,12 +542,12 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Creates the declaration of an single ML variable
-   * 
-   * @param pname name of the variable to be declared
-   * @param variable type
-   * @return DOM element representing the color set.
-   */
+    * Creates the declaration of an single ML variable
+    * 
+    * @param pname name of the variable to be declared
+    * @param variable type
+    * @return DOM element representing the color set.
+    */
    protected Element createVarDecl( String pname, String ptype) {
       HashSet<String> lvar = new HashSet<String>();
       lvar.add( pname );
@@ -552,12 +555,12 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /** 
-   * Creates the declaration of a list of variables from the same type
-   * 
-   * @param plist Structure containing all variables to be declared
-   * @param variable type
-   * @return DOM element representing the color set.
-   */
+    * Creates the declaration of a list of variables from the same type
+    * 
+    * @param plist Structure containing all variables to be declared
+    * @param variable type
+    * @return DOM element representing the color set.
+    */
    protected Element createVarDeclList( Collection<String> plist, String ptype) {
 
       if (plist.isEmpty()) throw new BadCPNDefinitionException("Cannot create empty var declaration of type " + ptype + ".");
@@ -599,11 +602,11 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
 
 
    /**
-   * Creates a basic transition, without layout information.
-   *
-   * @param pname Text to be displayed in the transition.
-   * @return DOM element representing the transition.
-   */
+    * Creates a basic transition, without layout information.
+    *
+    * @param pname Text to be displayed in the transition.
+    * @return DOM element representing the transition.
+    */
    public Element createBasicTransition(String pname) {
       Element ltrans = mdocument.createElement( "trans" );
       ltrans.setAttribute( "id", getUniqueId() );
@@ -618,12 +621,12 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates a transition containing a condition.
-   *
-   * @param pname Text to be displayed in the substitution transition.
-   * @param pcondition Condition necessary to trigger the transition, specified as ML expression.
-   * @return DOM element representing the substitution transition.
-   */
+    * Creates a transition containing a condition.
+    *
+    * @param pname Text to be displayed in the substitution transition.
+    * @param pcondition Condition necessary to trigger the transition, specified as ML expression.
+    * @return DOM element representing the substitution transition.
+    */
    public Element createConditionTransition( String pname, String pcondition ) {
       // First create the ordinary transition
       Element ltrans = createBasicTransition( pname );
@@ -642,11 +645,11 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates a substitute transition without references to its subpage.
-   *
-   * @param pname Text to be displayed in the substitution transition.
-   * @return DOM element representing the substitution transition.
-   */
+    * Creates a substitute transition without references to its subpage.
+    *
+    * @param pname Text to be displayed in the substitution transition.
+    * @return DOM element representing the substitution transition.
+    */
    public Element createSubstitutionTransition( String pname ) {
       // First create the ordinary transition
       Element ltrans = createBasicTransition(pname);
@@ -664,16 +667,16 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Set the in-port/in-socket and out-port/out-socket pairs, and instantiate subpage.
-   *
-   * @param pstranstion Element of the substitution transition.
-   * @param ppageid. The identifier of the actual page that the transition represents.
-   * @param pinport Id of the in-port place at the subpage.
-   * @param pinsocket Id of the in-socket place at the superpage.
-   * @param poutport Id of the out-port place at the subpage.
-   * @param poutsocket Id of the out-socket place at the superpage.
-   * @return DOM element representing the substitution transition with the socket/port set.
-   */
+    * Set the in-port/in-socket and out-port/out-socket pairs, and instantiate subpage.
+    *
+    * @param pstranstion Element of the substitution transition.
+    * @param ppageid. The identifier of the actual page that the transition represents.
+    * @param pinport Id of the in-port place at the subpage.
+    * @param pinsocket Id of the in-socket place at the superpage.
+    * @param poutport Id of the out-port place at the subpage.
+    * @param poutsocket Id of the out-socket place at the superpage.
+    * @return DOM element representing the substitution transition with the socket/port set.
+    */
    public void connectSubstitutionPage( Element pstransition, String pinsocket, String poutsocket, String psubpageid, String pinport, String poutport ) {
 
       NodeList lsubslist = pstransition.getElementsByTagName( "subst" );
@@ -687,16 +690,16 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Set the in-port/in-socket and out-port/out-socket pairs, and instantiate subpage.
-   *
-   * @param pstranstion Element of the substitution transition.
-   * @param pinsocket Place element of the in-socket place at the superpage.
-   * @param poutsocket Place elelement of the out-socket place at the superpage.
-   * @param psubpage Element of the subpage represented by the substitution transition.
-   * @param pinport Place element of the subpage's in-port.
-   * @param poutport Place element of the subpage's out-port.
-   * @return DOM element representing the substitution transition with the socket/port set.
-   */
+    * Set the in-port/in-socket and out-port/out-socket pairs, and instantiate subpage.
+    *
+    * @param pstranstion Element of the substitution transition.
+    * @param pinsocket Place element of the in-socket place at the superpage.
+    * @param poutsocket Place elelement of the out-socket place at the superpage.
+    * @param psubpage Element of the subpage represented by the substitution transition.
+    * @param pinport Place element of the subpage's in-port.
+    * @param poutport Place element of the subpage's out-port.
+    * @return DOM element representing the substitution transition with the socket/port set.
+    */
    public void connectSubstitutionPage( Element pstransition, Element pinsocket, Element poutsocket, Element psubpage, Element pinport, Element poutport ) {
 
       String linsocket = pinsocket.getAttribute( "id" );
@@ -713,11 +716,11 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Finds the in-port of a subpage, or null if not found.
-   *
-   * @param ppage A page element, which may be a subpage.
-   * @return Id of the first in-port found in this page. Return null if not found.
-   */
+    * Finds the in-port of a subpage, or null if not found.
+    *
+    * @param ppage A page element, which may be a subpage.
+    * @return Id of the first in-port found in this page. Return null if not found.
+    */
    public String getInPortPlaceId( Element ppage ) {
       NodeList lplacelist = ppage.getElementsByTagName( "place" );
 
@@ -741,11 +744,11 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Finds the Out-port of a subpage, or null if not found.
-   *
-   * @param ppage A page element, which may be a subpage.
-   * @return Id of the first out-port found in this page. Return null if not found.
-   */
+    * Finds the Out-port of a subpage, or null if not found.
+    *
+    * @param ppage A page element, which may be a subpage.
+    * @return Id of the first out-port found in this page. Return null if not found.
+    */
    public String getOutPortPlaceId( Element ppage ) {
       NodeList lplacelist = ppage.getElementsByTagName( "place" );
 
@@ -769,12 +772,12 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates a place with minimum information: name, type, initial marking and Id. No graphical information is present.
-   * @param pname text describig the place.
-   * @param ptype color set of the present place.
-   * @param pinit text containing initial marking.
-   * @return a basic place, without layout information.
-   */
+    * Creates a place with minimum information: name, type, initial marking and Id. No graphical information is present.
+    * @param pname text describig the place.
+    * @param ptype color set of the present place.
+    * @param pinit text containing initial marking.
+    * @return a basic place, without layout information.
+    */
    public Element createBasicPlace(String pname, String ptype, String pinit) {
 
       // Create place object: 0<place id="?">
@@ -817,14 +820,14 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates a fusion place, set locally the information and add it to the fusion set.
-   *
-   * @param pfusionname Name of the fusion set to be added to.
-   * @param pname text describig the place.
-   * @param ptype color set of the present place.
-   * @param pinit text containing initial marking.
-   * @return an in-port place.
-   */
+    * Creates a fusion place, set locally the information and add it to the fusion set.
+    *
+    * @param pfusionname Name of the fusion set to be added to.
+    * @param pname text describig the place.
+    * @param ptype color set of the present place.
+    * @param pinit text containing initial marking.
+    * @return an in-port place.
+    */
    public Element createFusionPlace( String pfusionname, String pname, String ptype, String pinit) {
 
       Element lplace = createBasicPlace( pname, ptype, pinit);
@@ -853,25 +856,26 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates a fusion place, set locally the information and add it to the fusion set. Set an empty initmark.
-   *
-   * @param pfusionname Name of the fusion set to be added to.
-   * @param pname text describig the place.
-   * @param ptype color set of the present place.
-   * @return an in-port place.
-   */
+    * Creates a fusion place, set locally the information and add it to the fusion set.
+    * Set an empty initmark.
+    *
+    * @param pfusionname Name of the fusion set to be added to.
+    * @param pname text describig the place.
+    * @param ptype color set of the present place.
+    * @return an in-port place.
+    */
    public Element createFusionPlace( String pfusionname, String pname, String ptype) {
       return createFusionPlace( pfusionname, pname, ptype, "");
    }
 
    /**
-   * Creates an in-port place with no graphical information
-   *
-   * @param pname text describig the place.
-   * @param ptype color set of the present place.
-   * @param pinit text containing initial marking.
-   * @return an in-port place.
-   */
+    * Creates an in-port place with no graphical information
+    *
+    * @param pname text describig the place.
+    * @param ptype color set of the present place.
+    * @param pinit text containing initial marking.
+    * @return an in-port place.
+    */
 
    public Element createInPortPlace(String pname, String ptype, String pinit) {
       Element lplace = createBasicPlace( pname, ptype, pinit);
@@ -887,12 +891,12 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Creates an out-port place with no graphical information
-   * @param pname text describig the place.
-   * @param ptype color set of the present place.
-   * @param pinit text containing initial marking.
-   * @return an in-port place.
-   */
+    * Creates an out-port place with no graphical information
+    * @param pname text describig the place.
+    * @param ptype color set of the present place.
+    * @param pinit text containing initial marking.
+    * @return an in-port place.
+    */
    public Element createOutPortPlace(String pname, String ptype, String pinit) {
       Element lplace = createBasicPlace( pname, ptype, pinit);
       
@@ -908,13 +912,13 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Create an arc element without orientation.
-   *
-   * @param pplaceid Identifier of the the adjacent place
-   * @param ptransid Identifier of the the adjacent transiton
-   * @param pexpression Arc expression
-   * @return Arc element with souce being the 
-   */
+    * Create an arc element without orientation.
+    *
+    * @param pplaceid Identifier of the the adjacent place
+    * @param ptransid Identifier of the the adjacent transiton
+    * @param pexpression Arc expression
+    * @return Arc element with souce being the 
+    */
    private Element createBasicArc( String pplaceid, String ptransid, String pexpression) {
 
       Element larc =  mdocument.createElement( "arc" );
@@ -948,24 +952,24 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Create an arc element without orientation with default expression.
-   *
-   * @param pplaceid Identifier of the the adjacent place
-   * @param ptransid Identifier of the the adjacent transiton
-   * @return Arc element with souce being the 
-   */
+    * Create an arc element without orientation with default expression.
+    *
+    * @param pplaceid Identifier of the the adjacent place
+    * @param ptransid Identifier of the the adjacent transiton
+    * @return Arc element with souce being the 
+    */
    private Element createBasicArc( String pplaceid, String ptransid) {
       return createBasicArc( pplaceid, ptransid, "1`()");
    }
 
    /**
-   * Create an arc element having a place as source, and transition as destination.
-   *
-   * @param pplaceid Identifier of the the adjacent place
-   * @param ptransid Identifier of the the adjacent transiton
-   * @param pexpression Arc expression
-   * @return Arc element with Plate-to-Transition orientation
-   */
+    * Create an arc element having a place as source, and transition as destination.
+    *
+    * @param pplaceid Identifier of the the adjacent place
+    * @param ptransid Identifier of the the adjacent transiton
+    * @param pexpression Arc expression
+    * @return Arc element with Plate-to-Transition orientation
+    */
    public Element createArcPtoT( String pplaceid, String ptransid, String pexpression) {
       Element larc = createBasicArc( pplaceid, ptransid, pexpression );
       larc.setAttribute( "orientation", "PtoT" );
@@ -974,25 +978,25 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Create an arc element having a place as source, and transition as destination.
-   *
-   * @param pplace Element of the adjacent place
-   * @param ptrans Element of the adjacent transiton
-   * @param pexpression Arc expression
-   * @return Arc element with Plate-to-Transition orientation
-   */
+    * Create an arc element having a place as source, and transition as destination.
+    *
+    * @param pplace Element of the adjacent place
+    * @param ptrans Element of the adjacent transiton
+    * @param pexpression Arc expression
+    * @return Arc element with Plate-to-Transition orientation
+    */
    public Element createArcPtoT( Element pplace, Element ptrans, String pexpression) {
       return createArcPtoT( pplace.getAttribute("id"), ptrans.getAttribute("id"), pexpression );
    }
 
    /**
-   * Create an arc element having a transition as source, and a place as destination.
-   *
-   * @param ptrans Element of the adjacent transiton
-   * @param pplace Element of the adjacent place
-   * @param pexpression Arc expression
-   * @return Arc element with Plate-to-Transition orientation
-   */
+    * Create an arc element having a transition as source, and a place as destination.
+    *
+    * @param ptrans Element of the adjacent transiton
+    * @param pplace Element of the adjacent place
+    * @param pexpression Arc expression
+    * @return Arc element with Plate-to-Transition orientation
+    */
    public Element createArcTtoP( String ptransid, String pplaceid, String pexpression) {
       Element larc = createBasicArc( pplaceid, ptransid, pexpression );
       larc.setAttribute( "orientation", "TtoP" );
@@ -1001,24 +1005,24 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Create an arc element having a transition as source, and a place as destination.
-   *
-   * @param ptransid Identifier of the the adjacent transiton
-   * @param pplaceid Identifier of the the adjacent place
-   * @param pexpression Arc expression
-   * @return Arc element with Plate-to-Transition orientation
-   */
+    * Create an arc element having a transition as source, and a place as destination.
+    *
+    * @param ptransid Identifier of the the adjacent transiton
+    * @param pplaceid Identifier of the the adjacent place
+    * @param pexpression Arc expression
+    * @return Arc element with Plate-to-Transition orientation
+    */
    public Element createArcTtoP( Element ptrans, Element pplace, String pexpression ) {
       return createArcTtoP( ptrans.getAttribute("id"), pplace.getAttribute("id"), pexpression );
    }
 
    /**
-   * Create an inhibitor arc
-   *
-   * @param pplaceid Identifier of the the adjacent place
-   * @param ptransid Identifier of the the adjacent transiton
-   * @return Inhibitor arc element
-   */
+    * Create an inhibitor arc
+    *
+    * @param pplaceid Identifier of the the adjacent place
+    * @param ptransid Identifier of the the adjacent transiton
+    * @return Inhibitor arc element
+    */
    public Element createInhibitorArc( String pplaceid, String ptransid) {
       Element larc = createBasicArc( pplaceid, ptransid, "");
       larc.setAttribute( "orientation", "Inhibitor" );
@@ -1027,22 +1031,23 @@ public class CPNToolsNetFactory extends BaseCPNCommunication {
    }
 
    /**
-   * Create an inhibitor arc
-   *
-   * @param pplace Element of the adjacent place
-   * @param ptrans Element of the adjacent transiton
-   * @return Inhibitor arc element
-   */
+    * Create an inhibitor arc
+    *
+    * @param pplace Element of the adjacent place
+    * @param ptrans Element of the adjacent transiton
+    * @return Inhibitor arc element
+    */
    public Element createInhibitorArc( Element pplace, Element ptrans) {
       return createInhibitorArc( pplace.getAttribute("id"), ptrans.getAttribute("id") );
    }
 
    /**
-   * Receives a mapping from element types and quantity and produce a string representing its marking in CPN tools format.
-   *
-   * @param Map between element type and quantity
-   * @return Text in CPN tools format representing the marking.
-   */
+    * Receives a mapping from element types and quantity
+    * and produce a string representing its marking in CPN tools format.
+    *
+    * @param Map between element type and quantity
+    * @return Text in CPN tools format representing the marking.
+    */
    public static String createMarkingText( Hashtable<String,Integer> pmarking) {
       String ltext = new String();
 

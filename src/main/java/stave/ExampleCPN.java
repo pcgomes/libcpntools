@@ -1,4 +1,3 @@
-
 /*
 * Models SyncTask construct, such as expressions, statements and variables,
 * as Coloured Petri ned subnets, in CPN Tools format.
@@ -11,23 +10,22 @@ package stave;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Hashtable;
-import java.util.HashSet;
 import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
-
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import stave.cpntools.*;
+import stave.cpntools.BaseCPNCommunication;
+import stave.cpntools.CPNToolsNetFactory;
+import stave.cpntools.LayoutFactory;
 
 public class ExampleCPN extends CPNToolsNetFactory {
 
@@ -180,36 +178,48 @@ public class ExampleCPN extends CPNToolsNetFactory {
       }
 
       public Element element() { return mpage; }
+
       public Element inPort()  { return mpinport; }
+
       public Element outPort() { return mpoutport; }
+
       protected Element addInPortPlace( String pname, String ptype, String pinit) {
 	 return (Element) mpage.appendChild( createInPortPlace( pname, ptype, pinit ) );
       }
+
       protected Element addOutPortPlace( String pname, String ptype, String pinit) {
 	 return (Element) mpage.appendChild( createOutPortPlace( pname, ptype, pinit ) );
       }
+
       protected Element addSubstitutionTransition( String pname ) {
 	 return (Element) mpage.appendChild( createSubstitutionTransition ( pname ) );
       }
+
       public void linkSubstitutionTransition( Element pstransition, Element pinsocket, Element poutsocket, Page psubpage ) {
 	 connectSubstitutionPage( pstransition, pinsocket, poutsocket, psubpage.element(), psubpage.inPort(), psubpage.outPort() );
       }
+
       protected Element addInhibitorArc( Element pplace, Element ptrans ) {
 	 return (Element) mpage.appendChild( createInhibitorArc( pplace, ptrans ) );
       }
+
       protected Element addArcPtoT( Element pplace, Element ptrans, String pexpression ) {
 	 return (Element) mpage.appendChild( createArcPtoT( pplace, ptrans, pexpression ) );
       }
+
       protected Element addArcTtoP( Element ptrans, Element pplace, String pexpression ) {
 	 return (Element) mpage.appendChild( createArcTtoP( ptrans, pplace, pexpression ) );
       }
+
       protected Element addPlace(String pname, String ptype, String pinit)  {
 	 return (Element) mpage.appendChild( createBasicPlace( pname, ptype, pinit ) );
       }
+
       // TODO - Check to discontiue
       protected Element addFusionPlace( String pfusionname, String pname, String ptype, String pinit)  {
 	 return (Element) mpage.appendChild( createFusionPlace( pfusionname, pname, ptype, pinit ) );
       }
+
       // Connect all places to a given transition with reflexive arcs (bidirectional, with same expression).
       // Connect a places and a transition with a reflexive arc (place)<-exp->[transition]
       // Notice: in CPN Tools it is represented by two distinct arcs, with opposite orientation.
@@ -224,12 +234,15 @@ public class ExampleCPN extends CPNToolsNetFactory {
 	 }
 	 return larcs;
       }
+
       protected Element addTransition( String pname ) {
 	 return (Element) mpage.appendChild( createBasicTransition( pname ) );
       }
+
       protected Element addConditionTransition( String pname, String pcondition ) {
 	 return (Element) mpage.appendChild( createConditionTransition( pname, pcondition ) );
       }
+
       protected Element addFusionAndFusionPlace( String pfusionname, String pname, String ptype, String pinit) {
 
 	 // Step1: Create the fusion set that all instances of this variable must participate.

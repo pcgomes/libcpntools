@@ -1,29 +1,26 @@
 /**
-* Helper class that creates new DOM elements for CPN Tools elements,
-* such as places, transitions, arcs and subpages,
-* @author Pedro de Carvalho Gomes <pedrodcg@csc.kth.se>
-*
-* TODO: Switch to dynamic dispatching, especially for setPosition
-*/
+ * Helper class that creates new DOM elements for CPN Tools elements,
+ * such as places, transitions, arcs and subpages,
+ * @author Pedro de Carvalho Gomes <pedrodcg@csc.kth.se>
+ *
+ * TODO: Switch to dynamic dispatching, especially for setPosition
+ */
 
 package stave.cpntools;
 
 import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.Iterator;
 import java.lang.Iterable;
+import java.util.Collection;
 import java.util.Hashtable;
-
+import java.util.Iterator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-
-import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -31,8 +28,8 @@ import org.w3c.dom.NodeList;
 public class LayoutFactory {
 
    /**
-   * This class generates 1-dimension coordiantes spreading elements evenly.
-   */
+    * This class generates 1-dimension coordiantes spreading elements evenly.
+    */
    public static class Spacer {
 
       // space between elements
@@ -54,10 +51,10 @@ public class LayoutFactory {
       }
 
       /**
-      * Returns the next 
-      *
-      * @return next uni-dimensional coordinate 
-      */
+       * Returns the next 
+       *
+       * @return next uni-dimensional coordinate 
+       */
       public int getNext() {
          // Return the previous value, but before calculate the next one.
          int lold = mcurrent;
@@ -107,8 +104,8 @@ public class LayoutFactory {
       }
 
       /**
-      *  This method is overwritten if an element's coordiantion must be propagated to subelements.
-      */
+       *  This method is overwritten if an element's coordiantion must be propagated to subelements.
+       */
       static void setPosition( Element pelement, int px, int py) {
          setPosattr( pelement, Integer.toString( px ), Integer.toString( py ));
       }
@@ -196,14 +193,14 @@ public class LayoutFactory {
       }
 
       /**
-      * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
-      * If the number of elements is odd, the first element is placed centrally;
-      * otherwise the elements are places simmetrically to the axis.
-      *
-      * @param plist DOM elements to be distributed
-      * @param py Fixed coordinate in the Y-axis
-      * @param pspace Distance between two elements
-      */
+       * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
+       * If the number of elements is odd, the first element is placed centrally;
+       * otherwise the elements are places simmetrically to the axis.
+       *
+       * @param plist DOM elements to be distributed
+       * @param py Fixed coordinate in the Y-axis
+       * @param pspace Distance between two elements
+       */
       public static void distributeHorizontally( Collection<Element> plist, int py, int pspace) {
          // Check if number of elements is even or odd
          int lfirst = ( (plist.size() & 1) == 0)?(pspace/2):0;
@@ -242,10 +239,10 @@ public class LayoutFactory {
       }
 
       /**
-      * Set the position of arcs in a given collection.
-      *
-      * @param ppage Distance between two elements
-      */
+       * Set the position of arcs in a given collection.
+       *
+       * @param ppage Distance between two elements
+       */
       public static void setDefaultLayout( Iterable<Element> plist ) {
           for ( Iterator<Element> i = plist.iterator(); i.hasNext(); ) {
              Element pelement = i.next();
@@ -270,14 +267,14 @@ public class LayoutFactory {
       }
 
       /**
-      * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
-      * If the number of elements is odd, the first element is placed centrally;
-      * otherwise the elements are places simmetrically to the axis.
-      *
-      * @param plist DOM elements to be distributed
-      * @param py Fixed coordinate in the Y-axis
-      * @param pspace Distance between two elements
-      */
+       * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
+       * If the number of elements is odd, the first element is placed centrally;
+       * otherwise the elements are places simmetrically to the axis.
+       *
+       * @param plist DOM elements to be distributed
+       * @param py Fixed coordinate in the Y-axis
+       * @param pspace Distance between two elements
+       */
       public static void distributeHorizontally( Collection<Element> plist, int py, int pspace) {
          // Check if number of elements is even or odd
          int lfirst = ( (plist.size() & 1) == 0)?(pspace/2):0;
@@ -332,14 +329,14 @@ public class LayoutFactory {
       }
 
       /**
-      * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
-      * If the number of elements is odd, the first element is placed centrally;
-      * otherwise the elements are places simmetrically to the axis.
-      *
-      * @param plist DOM elements to be distributed
-      * @param py Fixed coordinate in the Y-axis
-      * @param pspace Distance between two elements
-      */
+       * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
+       * If the number of elements is odd, the first element is placed centrally;
+       * otherwise the elements are places simmetrically to the axis.
+       *
+       * @param plist DOM elements to be distributed
+       * @param py Fixed coordinate in the Y-axis
+       * @param pspace Distance between two elements
+       */
       public static void distributeHorizontally( Collection<Element> plist, int py, int pspace) {
          // Check if number of elements is even or odd
          int lfirst = ( (plist.size() & 1) == 0)?(pspace/2):0;
@@ -431,14 +428,14 @@ public class LayoutFactory {
       }
 
       /**
-      * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
-      * If the number of elements is odd, the first element is placed centrally;
-      * otherwise the elements are places simmetrically to the axis.
-      *
-      * @param plist DOM elements to be distributed
-      * @param py Fixed coordinate in the Y-axis
-      * @param pspace Distance between two elements
-      */
+       * Take a list of elements and distribute them horizontally with equal spacing,
+       * starting from 0. If the number of elements is odd, the first element is placed centrally;
+       * otherwise the elements are places simmetrically to the axis.
+       *
+       * @param plist DOM elements to be distributed
+       * @param py Fixed coordinate in the Y-axis
+       * @param pspace Distance between two elements
+       */
       public static void distributeHorizontally( Collection<Element> plist, int py, int pspace) {
          // Check if number of elements is even or odd
          int lfirst = ( (plist.size() & 1) == 0)?(pspace/2):0;
@@ -498,14 +495,14 @@ public class LayoutFactory {
       }
 
       /**
-      * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
-      * If the number of elements is odd, the first element is placed centrally;
-      * otherwise the elements are places simmetrically to the axis.
-      *
-      * @param plist DOM elements to be distributed
-      * @param py Fixed coordinate in the Y-axis
-      * @param pspace Distance between two elements
-      */
+       * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
+       * If the number of elements is odd, the first element is placed centrally;
+       * otherwise the elements are places simmetrically to the axis.
+       *
+       * @param plist DOM elements to be distributed
+       * @param py Fixed coordinate in the Y-axis
+       * @param pspace Distance between two elements
+       */
       public static void distributeHorizontally( Collection<Element> plist, int py, int pspace) {
          // Check if number of elements is even or odd
          int lfirst = ( (plist.size() & 1) == 0)?(pspace/2):0;
@@ -565,14 +562,14 @@ public class LayoutFactory {
       }
 
       /**
-      * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
-      * If the number of elements is odd, the first element is placed centrally;
-      * otherwise the elements are places simmetrically to the axis.
-      *
-      * @param plist DOM elements to be distributed
-      * @param py Fixed coordinate in the Y-axis
-      * @param pspace Distance between two elements
-      */
+       * Take a list of elements and distribute them horizontally with equal spacing, starting from 0.
+       * If the number of elements is odd, the first element is placed centrally;
+       * otherwise the elements are places simmetrically to the axis.
+       *
+       * @param plist DOM elements to be distributed
+       * @param py Fixed coordinate in the Y-axis
+       * @param pspace Distance between two elements
+       */
       public static void distributeHorizontally( Collection<Element> plist, int py, int pspace) {
          // Check if number of elements is even or odd
          int lfirst = ( (plist.size() & 1) == 0)?(pspace/2):0;
@@ -666,10 +663,10 @@ public class LayoutFactory {
       }
 
       /**
-      * Set the position of arcs in a given collection.
-      *
-      * @param ppage Distance between two elements
-      */
+       * Set the position of arcs in a given collection.
+       *
+       * @param ppage Distance between two elements
+       */
       public static void setLayoutAndPosition( Iterable<Element> plist ) {
           for ( Iterator<Element> i = plist.iterator(); i.hasNext(); ) {
              Element pelement = i.next();
@@ -679,10 +676,10 @@ public class LayoutFactory {
       }
 
       /**
-      * Set the position of arcs in a whole page. 
-      *
-      * @param ppage Distance between two elements
-      */
+       * Set the position of arcs in a whole page. 
+       *
+       * @param ppage Distance between two elements
+       */
       public static void positionAllArcs( Element ppage ) {
 
           NodeList larclist = ppage.getElementsByTagName( "arc" );
@@ -775,10 +772,10 @@ public class LayoutFactory {
       }
 
       /**
-      * Set the position of arcs in a whole page. 
-      *
-      * @param ppage Distance between two elements
-      */
+       * Set the position of arcs in a whole page. 
+       *
+       * @param ppage Distance between two elements
+       */
       public static void positionAllArcs( Element ppage ) {
 
           NodeList larclist = ppage.getElementsByTagName( "arc" );
